@@ -1,0 +1,5 @@
+../Core/Src/Neraiv_SerialIO.c:9:6:sioInit	1
+../Core/Src/Neraiv_SerialIO.c:22:6:sioCreatePot	2
+../Core/Src/Neraiv_SerialIO.c:34:6:sioCreatePin	2
+../Core/Src/Neraiv_SerialIO.c:46:13:getElementByID	5
+../Core/Src/Neraiv_SerialIO.c:71:6:sioHandle	6
