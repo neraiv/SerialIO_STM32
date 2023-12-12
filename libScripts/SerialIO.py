@@ -30,12 +30,10 @@ def complete_to_6_bytes(msg):
         print("ERROR")
         
     return msg
-     
-list_ports()
 
 class SerialIO():
-    def __init__(self, badurate: int, portName: str) -> None:
-        self.port = serial.Serial(port="COM5",baudrate=badurate,timeout=1)
+    def __init__(self, baudrate: int, portName: str) -> None:
+        self.port = serial.Serial(port="COM5",baudrate=baudrate,timeout=1)
         self.port.close()
         self.port.open()
 
