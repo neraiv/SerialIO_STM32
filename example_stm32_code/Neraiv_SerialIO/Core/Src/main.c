@@ -43,10 +43,8 @@
 UART_HandleTypeDef huart4;
 
 /* USER CODE BEGIN PV */
-SerialIOUart		sio;
-SerialPot 			pot1;
-SerialPot 			pot2;
-SerialPin			pin1;
+SerialIOUart		sio     = {0};
+SerialSignal    signal1 = {0};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -92,10 +90,15 @@ int main(void)
   MX_GPIO_Init();
   MX_UART4_Init();
   /* USER CODE BEGIN 2 */
+
+  signal1.type = SIO_SIGNAL_PWM;
+  signal1.signal.pwm.amplitude = SIO_SIGNAL_AMPLITUDE_MAX;
+  signal1.signal.pwm.frequancy = 150;
+  signal1.signal.pwm.duty_cyclce = 50;
+  
 	sioInit(&sio, &huart4);
-	sioCreatePin(&sio, &pin1, 0x00AA);
-	sioCreatePot(&sio, &pot1, 0x00AB);
-	sioCreatePot(&sio, &pot2, 0x00AC);
+	sioCreatePin(0x00AA, LED_PIN_GPIO_Port, LED_PIN_Pin);
+	sioCreatePot(0x00AB, LED_POT_GPIO_Port, LED_POT_Pin);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -105,17 +108,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  if(pin1.state == SIO_HIGH){
-		  HAL_GPIO_WritePin(LED_PIN_GPIO_Port, LED_PIN_Pin, GPIO_PIN_SET);
-	  }else{
-		  HAL_GPIO_WritePin(LED_PIN_GPIO_Port, LED_PIN_Pin, GPIO_PIN_RESET);
-	  }
-
-	  if(pot1.pin.state == SIO_HIGH){
-	  }else{
-		  HAL_GPIO_WritePin(LED_PIN_GPIO_Port, LED_PIN_Pin, GPIO_PIN_RESET);
-	  }
-
+    sioHandle(&sio);
   }
   /* USER CODE END 3 */
 }
