@@ -1,3 +1,4 @@
+
 import SerialIO
 import time
 
@@ -7,7 +8,7 @@ sio = SerialIO.SerialIO(baudrate = 115200, portName = "COM5") # Connects the por
 
 ## Example blink application.
 while(1):
-    sio.setPin(0x00AA,0)
+    sio.setDigital(0x00AA, SerialIO.PIN_State.HIGH)
     time.sleep(1)
-    sio.setPin(0x00AA,1)
+    sio.setDigital(0x00AA, SerialIO.PIN_State.LOW)
     time.sleep(1)
